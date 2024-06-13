@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "genprotos/";
+
+package protos;
+import "user.proto";
+service RestoranService {
+    rpc CreateRestoran(Restoran) returns (Void) {}
+    rpc DeleteRestoran(ById) returns (Void) {}
+    rpc UpdateRestoran(Restoran) returns(Void){}
+    rpc GetByIdRestoran(ById) returns (Restoran) {}
+    rpc GetAllRestoran(Restoran) returns (GetAllRestorans){}
+}
+
+
+message Restoran {
+    string id           = 1;
+    string name         = 2;
+    string address      = 3;
+    string phone_number = 4;
+    string description  = 5; 
+}
+
+message GetAllRestorans {
+    repeated Restoran restorans = 1;
+}

@@ -1,0 +1,3 @@
+[submodule "restaurant-submodule"]
+	path = restaurant-submodule
+	url = git@github.com:dilshodforever/restaurant-submodule.git

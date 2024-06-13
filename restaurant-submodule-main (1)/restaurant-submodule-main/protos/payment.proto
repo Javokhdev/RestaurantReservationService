@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "genprotos/";
+
+package protos;
+import "user.proto";
+
+service PaymentService {
+    rpc CreatePayment(Payment) returns (Void) {}
+    rpc DeletePayment(ById) returns (Void) {}
+    rpc UpdatePayment(Payment) returns(Void){}
+    rpc GetByIdPayment(ById) returns (Payment) {}
+    rpc GetAllPayment(Payment) returns (GetAllPayments){}
+}
+
+
+message Payment {
+    string id = 1;
+    string reservation_id = 2;
+    float amount = 3;
+    string payment_method = 4; 
+    string payment_status = 5;
+}
+
+message GetAllPayments {
+    repeated Payment payments =1;
+}

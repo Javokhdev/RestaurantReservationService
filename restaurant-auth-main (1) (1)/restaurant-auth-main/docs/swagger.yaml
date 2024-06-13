@@ -1,0 +1,209 @@
+basePath: /
+definitions:
+  genprotos.GetAllUsers:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/genprotos.User'
+        type: array
+    type: object
+  genprotos.User:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      user_name:
+        type: string
+    type: object
+host: localhost:8081
+info:
+  contact: {}
+  description: Voting service
+  version: "1.0"
+paths:
+  /User/getbyid/{id}:
+    get:
+      consumes:
+      - application/json
+      description: GetById page
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetById Successful
+          schema:
+            $ref: '#/definitions/genprotos.User'
+        "401":
+          description: Error while GetByIdd
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: GetById User
+      tags:
+      - User
+  /User/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update page
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update
+        in: body
+        name: Update
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Update Successful
+          schema:
+            type: string
+        "401":
+          description: Error while created
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Update User
+      tags:
+      - User
+  /user/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete page
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Delete Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Deleted
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Delete User
+      tags:
+      - User
+  /user/getall:
+    get:
+      consumes:
+      - application/json
+      description: GetAll page
+      parameters:
+      - in: query
+        name: email
+        type: string
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: password
+        type: string
+      - in: query
+        name: user_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetAll Successful
+          schema:
+            $ref: '#/definitions/genprotos.GetAllUsers'
+        "401":
+          description: Error while GetAll
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: GetAll User
+      tags:
+      - User
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: LoginUser page
+      parameters:
+      - description: Create
+        in: body
+        name: Create
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: LoginUser Successful
+          schema:
+            $ref: '#/definitions/genprotos.User'
+        "401":
+          description: Error while LoginUserd
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: /LoginUser
+      tags:
+      - User
+  /user/registr:
+    post:
+      consumes:
+      - application/json
+      description: Create page
+      parameters:
+      - description: Create
+        in: body
+        name: Create
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Create Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Created
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Create User
+      tags:
+      - User
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authourization
+    type: apiKey
+swagger: "2.0"

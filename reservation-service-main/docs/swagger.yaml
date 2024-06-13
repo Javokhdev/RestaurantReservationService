@@ -1,0 +1,161 @@
+definitions:
+  genprotos.GetAllReservations:
+    properties:
+      reservations:
+        items:
+          $ref: '#/definitions/genprotos.Reservation'
+        type: array
+    type: object
+  genprotos.Reservation:
+    properties:
+      id:
+        type: string
+      reservation_time:
+        type: string
+      restaurant_id:
+        type: string
+      status:
+        type: string
+      user_id:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /Reservation/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete page
+      parameters:
+      - description: Reservation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Delete Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Deleted
+          schema:
+            type: string
+      summary: Delete Reservation
+      tags:
+      - Reservation
+  /Reservation/getall:
+    get:
+      consumes:
+      - application/json
+      description: GetAll page
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetAll Successful
+          schema:
+            $ref: '#/definitions/genprotos.GetAllReservations'
+        "401":
+          description: Error while GetAlld
+          schema:
+            type: string
+      summary: GetAll Reservation
+      tags:
+      - Reservation
+  /Reservation/getbyid/{id}:
+    get:
+      consumes:
+      - application/json
+      description: GetById page
+      parameters:
+      - description: Reservation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetById Successful
+          schema:
+            $ref: '#/definitions/genprotos.Reservation'
+        "401":
+          description: Error while GetByIdd
+          schema:
+            type: string
+      summary: GetById Reservation
+      tags:
+      - Reservation
+  /Reservation/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update page
+      parameters:
+      - description: Reservation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update
+        in: body
+        name: Update
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.Reservation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Update Successful
+          schema:
+            type: string
+        "401":
+          description: Error while created
+          schema:
+            type: string
+      summary: Update Reservation
+      tags:
+      - Reservation
+  /reservation/create/{user_id}/{restaurant_id}:
+    post:
+      consumes:
+      - application/json
+      description: Create page
+      parameters:
+      - description: Restoran ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      - description: User id
+        in: path
+        name: restaurant_id
+        required: true
+        type: string
+      - description: Create
+        in: body
+        name: Create
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.Reservation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Create Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Created
+          schema:
+            type: string
+      summary: Create Reservation
+      tags:
+      - Reservation
+swagger: "2.0"

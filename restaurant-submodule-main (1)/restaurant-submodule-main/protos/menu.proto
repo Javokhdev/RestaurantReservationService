@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "genprotos/";
+
+package protos;
+import "user.proto";
+
+service MenuService {
+    rpc CreateMenu(Menu) returns (Void) {}
+    rpc DeleteMenu(ById) returns (Void) {}
+    rpc UpdateMenu(Menu) returns(Void){}
+    rpc GetByIdMenu(ById) returns (Menu) {}
+    rpc GetAllMenu(Menu) returns (GetAllMenus){}
+}
+
+
+message Menu {
+    string id = 1;
+    string restaurant_id =2;
+    string name =3;
+    string description = 4; 
+    float price = 5;
+}
+
+message GetAllMenus {
+    repeated Menu menus =1;
+}
